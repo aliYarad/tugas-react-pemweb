@@ -9,29 +9,14 @@ interface ProductCardProps {
   onDelete: (product: Product) => void;
 }
 
-// Function to get the matching icon based on product name
-const getProductEmoticon = (name: string): string => {
-  const lower = name.toLowerCase();
-  if (lower.includes('pulpen') || lower.includes('pena')) return '🖊️';
-  if (lower.includes('buku')) return '📓';
-  if (lower.includes('spidol')) return '🖍️';
-  if (lower.includes('penggaris') || lower.includes('garis')) return '📏';
-  if (lower.includes('penghapus') || lower.includes('tipex')) return '🧼';
-  if (lower.includes('pensil')) return '✏️';
-  if (lower.includes('kertas')) return '📄';
-  if (lower.includes('gunting')) return '✂️';
-  if (lower.includes('tas')) return '🎒';
-  return '📦';
-};
-
-// Soft Pastel Theme Palette
+// Soft Pastel Theme Palette for Tabs
 const PASTEL_THEMES = [
-  { tab: '#BAE6FD', iconBg: '#E0F2FE' }, // Soft Pastel Sky Blue (Pulpen)
-  { tab: '#FEF08A', iconBg: '#FEF9C3' }, // Soft Pastel Butter Yellow (Buku Tulis)
-  { tab: '#FBCFE8', iconBg: '#FCE7F3' }, // Soft Pastel Rose Pink (Spidol)
-  { tab: '#BBF7D0', iconBg: '#DCFCE7' }, // Soft Pastel Mint Green (Penggaris)
-  { tab: '#E9D5FF', iconBg: '#F3E8FF' }, // Soft Pastel Lavender (Penghapus)
-  { tab: '#FED7AA', iconBg: '#FFEDD5' }, // Soft Pastel Peach
+  '#BAE6FD', // Soft Pastel Sky Blue
+  '#FEF08A', // Soft Pastel Butter Yellow
+  '#FBCFE8', // Soft Pastel Rose Pink
+  '#BBF7D0', // Soft Pastel Mint Green
+  '#E9D5FF', // Soft Pastel Lavender
+  '#FED7AA', // Soft Pastel Peach
 ];
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -40,24 +25,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onEdit,
   onDelete,
 }) => {
-  const theme = PASTEL_THEMES[index % PASTEL_THEMES.length];
-  const emoticon = getProductEmoticon(product.name);
+  const tabColor = PASTEL_THEMES[index % PASTEL_THEMES.length];
 
   return (
     <div className="folder-card-wrapper">
       {/* Folder tab on top */}
-      <div className="folder-tab" style={{ backgroundColor: theme.tab }}></div>
+      <div className="folder-tab" style={{ backgroundColor: tabColor }}></div>
 
       {/* Main folder card */}
       <div className="folder-card">
         <div className="folder-card-top">
           <span className="card-id-badge">ID: {product.id}</span>
-          <div
-            className="folder-icon-box"
-            style={{ backgroundColor: theme.iconBg }}
-          >
-            <span>{emoticon}</span>
-          </div>
         </div>
 
         <div className="folder-card-content">
