@@ -20,7 +20,20 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   if (products.length === 0) {
     return (
       <div className="empty-state-fullscreen">
-        <div style={{ fontSize: '38px', marginBottom: '10px' }}>🔍</div>
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          style={{ marginBottom: '12px', color: '#666666' }}
+        >
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
         <h3>Tidak ada produk yang ditemukan</h3>
         <p>Coba gunakan kata kunci pencarian lain atau tambahkan produk baru.</p>
         <button

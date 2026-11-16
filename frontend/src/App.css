@@ -101,6 +101,11 @@
   color: #1E1E1E;
 }
 
+.search-svg-icon {
+  color: #1E1E1E;
+  flex-shrink: 0;
+}
+
 .search-neo-input {
   flex: 1;
   border: none;
