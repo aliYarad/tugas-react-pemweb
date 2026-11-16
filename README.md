@@ -1,5 +1,4 @@
-# Express Products API
->REST API produk menggunakan ExpressJS, TypeScript, Prisma, dan PostgreSQL.
+# tugas3-react-pemweb
 
 Nama : Aliya Rahmadina
 
