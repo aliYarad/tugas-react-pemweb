@@ -1,0 +1,70 @@
+@reference "../../../../app/globals.css";
+
+.card {
+    @apply flex flex-col justify-between min-w-0 rounded-2xl border-2 border-slate-900 bg-white p-5 shadow-[4px_4px_0px_0px_#0f172a] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_#0f172a];
+}
+
+.header {
+    @apply mb-4 flex items-center justify-between;
+}
+
+.iconWrapper {
+    @apply flex size-10 items-center justify-center rounded-xl border-2 border-slate-900 bg-cyan-200 text-slate-900 shadow-[2px_2px_0px_0px_#0f172a];
+}
+
+.icon {
+    @apply size-5 shrink-0;
+}
+
+.nameLink {
+    @apply block;
+}
+
+.name {
+    @apply text-lg font-bold text-slate-900 transition-colors wrap-break-word;
+}
+
+.nameLink:hover .name {
+    @apply text-indigo-600 underline;
+}
+
+.price {
+    @apply mt-1 mb-5 text-xl font-extrabold text-emerald-600;
+}
+
+.actions {
+    @apply flex items-center gap-2 mt-auto;
+}
+
+/* List Card variant */
+.listCard {
+    @apply flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border-2 border-slate-900 bg-white p-4 shadow-[4px_4px_0px_0px_#0f172a] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_#0f172a];
+}
+
+.listLeft {
+    @apply flex items-center gap-3.5;
+}
+
+.listIconWrapper {
+    @apply flex size-12 shrink-0 items-center justify-center rounded-xl border-2 border-slate-900 bg-cyan-200 text-slate-900 shadow-[2px_2px_0px_0px_#0f172a];
+}
+
+.listHeader {
+    @apply flex items-center gap-2 mb-0.5;
+}
+
+.listNameLink {
+    @apply hover:text-indigo-600;
+}
+
+.listName {
+    @apply text-base font-bold text-slate-900;
+}
+
+.listPrice {
+    @apply text-sm font-extrabold text-emerald-600;
+}
+
+.listActions {
+    @apply flex items-center gap-2 self-end sm:self-center shrink-0;
+}
