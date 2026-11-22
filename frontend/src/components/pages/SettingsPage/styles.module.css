@@ -1,0 +1,69 @@
+@reference "../../../../app/globals.css";
+
+.container {
+    @apply flex flex-col gap-6 max-w-3xl mx-auto;
+}
+
+.header {
+    @apply rounded-2xl border-2 border-slate-900 bg-white p-6 shadow-[5px_5px_0px_0px_#0f172a];
+}
+
+.iconWrapper {
+    @apply flex size-12 items-center justify-center rounded-xl border-2 border-slate-900 bg-amber-200 text-slate-900 shadow-[2px_2px_0px_0px_#0f172a];
+}
+
+.title {
+    @apply text-2xl font-black text-slate-900;
+}
+
+.description {
+    @apply mt-1 text-sm font-medium text-slate-600;
+}
+
+.successAlert {
+    @apply flex items-center gap-2 rounded-2xl border-2 border-slate-900 bg-emerald-200 p-4 text-sm font-bold text-slate-900 shadow-[4px_4px_0px_0px_#0f172a];
+}
+
+.section {
+    @apply rounded-2xl border-2 border-slate-900 bg-white p-6 shadow-[5px_5px_0px_0px_#0f172a];
+}
+
+.sectionHeader {
+    @apply mb-4 pb-3 border-b-2 border-slate-900;
+}
+
+.sectionTitle {
+    @apply text-base font-black text-slate-900;
+}
+
+.sectionDesc {
+    @apply text-xs font-medium text-slate-500 mt-0.5;
+}
+
+.optionsGrid {
+    @apply grid grid-cols-1 sm:grid-cols-2 gap-4;
+}
+
+.optionCard {
+    @apply flex items-start gap-3.5 rounded-2xl border-2 border-slate-900 p-4 text-left shadow-[3px_3px_0px_0px_#0f172a] transition-all hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_0px_#0f172a] cursor-pointer bg-white;
+}
+
+.optionActive {
+    @apply bg-amber-100 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a];
+}
+
+.optionIconWrapper {
+    @apply flex size-11 shrink-0 items-center justify-center rounded-xl border-2 border-slate-900 bg-white text-slate-900 shadow-[2px_2px_0px_0px_#0f172a];
+}
+
+.optionName {
+    @apply text-sm font-black text-slate-900;
+}
+
+.optionDescription {
+    @apply text-xs font-medium text-slate-600 mt-1;
+}
+
+.serverInfoCard {
+    @apply flex items-center justify-between rounded-xl border-2 border-slate-900 bg-amber-50 p-4 shadow-[2px_2px_0px_0px_#0f172a];
+}
