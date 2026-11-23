@@ -59,6 +59,7 @@ export default function ProductRemote({
             headers: { Accept: "application/json" },
         })
 
+        if (response.status === 404) return null
         if (!response.ok) {
             throw new Error(`Gagal memuat detail produk (HTTP ${response.status}).`)
         }

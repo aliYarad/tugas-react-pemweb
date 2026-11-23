@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react"
+import { useState, useMemo, useCallback, useEffect } from "react"
 import { TbPlus, TbRefresh, TbAlertCircle, TbCheck } from "react-icons/tb"
 import type { Product } from "../../../types/product"
 import Button from "../../atoms/Button"
@@ -9,22 +9,17 @@ import ProductGrid from "../../organisms/ProductGrid"
 import ProductList from "../../organisms/ProductList"
 import ProductModal from "../../organisms/ProductModal"
 import DeleteConfirmModal from "../../organisms/DeleteConfirmModal"
-import ProductModel from "../../../data/product/model/product-model.ts"
 import ProductRemote from "../../../data/product/source/product-remote.ts"
 import ProductRepository from "../../../data/product/repository/product-repository.ts"
 import styles from "./styles.module.css"
-
-const exampleProducts = [
-    ProductModel.fromResponse({ id: 1, name: "Pulpen", price: 5000 }).toJSON(),
-]
 
 const repository = ProductRepository(
     ProductRemote({ baseUrl: import.meta.env.VITE_API_BASE_URL ?? "" }),
 )
 
 export default function ProductsPage() {
-    const [products, setProducts] = useState<Product[]>(exampleProducts)
-    const [isLoading, setIsLoading] = useState(false)
+    const [products, setProducts] = useState<Product[]>([])
+    const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState("")
     const [message, setMessage] = useState("")
     const [selectedProductId, setSelectedProductId] = useState<number | null>(null)
@@ -54,7 +49,7 @@ export default function ProductsPage() {
         localStorage.setItem("preferred_view_mode", mode)
     }
 
-    async function handleLoadProducts() {
+    const handleLoadProducts = useCallback(async () => {
         setIsLoading(true)
         setError("")
         setMessage("Memuat produk…")
@@ -69,7 +64,11 @@ export default function ProductsPage() {
         } finally {
             setIsLoading(false)
         }
-    }
+    }, [])
+
+    useEffect(() => {
+        void handleLoadProducts()
+    }, [handleLoadProducts])
 
     function handleSelectProduct(id: number) {
         setSelectedProductId(id)
@@ -202,7 +201,7 @@ export default function ProductsPage() {
 
             {/* Products Listing */}
             <section
-                aria-label="Contoh daftar produk"
+                            aria-label="Daftar produk"
                 aria-busy={isLoading}
                 className={styles.listSection}
             >
@@ -210,7 +209,9 @@ export default function ProductsPage() {
                     <div className={styles.emptyState}>
                         <p className={styles.notice}>
                             {products.length === 0
-                                ? "Belum ada produk dari API."
+                                ? isLoading
+                                    ? "Memuat produk dari API..."
+                                    : "Belum ada produk dari API."
                                 : `Tidak ada produk yang cocok dengan pencarian "${searchQuery}".`}
                         </p>
                         {products.length === 0 ? (

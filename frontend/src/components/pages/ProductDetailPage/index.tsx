@@ -40,8 +40,11 @@ export default function ProductDetailPage() {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [successMessage, setSuccessMessage] = useState("")
+    const [actionError, setActionError] = useState("")
 
     const displayError = invalidError || fetchError
+    const productNotFound =
+        isInvalidId || fetchError.toLowerCase().includes("tidak ditemukan")
 
     useEffect(() => {
         if (isInvalidId) return
@@ -76,23 +79,25 @@ export default function ProductDetailPage() {
 
     async function handleUpdate(values: { name: string; price: number }) {
         if (!product) return
+        setActionError("")
         try {
             const updated = await repository.updateProduct(product.id, values)
             setProduct(updated.toJSON())
             setSuccessMessage("Data produk berhasil diperbarui.")
             setTimeout(() => setSuccessMessage(""), 4000)
         } catch (err) {
-            setFetchError(err instanceof Error ? err.message : "Gagal memperbarui produk.")
+            setActionError(err instanceof Error ? err.message : "Gagal memperbarui produk.")
             throw err
         }
     }
 
     async function handleDelete(deleteId: number) {
+        setActionError("")
         try {
             await repository.deleteProduct(deleteId)
             navigate("/products", { replace: true })
         } catch (err) {
-            setFetchError(err instanceof Error ? err.message : "Gagal menghapus produk.")
+            setActionError(err instanceof Error ? err.message : "Gagal menghapus produk.")
             throw err
         }
     }
@@ -123,7 +128,9 @@ export default function ProductDetailPage() {
                     <div className={styles.notFoundIconWrapper}>
                         <TbAlertCircle className="size-8 text-amber-600" />
                     </div>
-                    <h2 className={styles.notFoundTitle}>Produk Tidak Ditemukan</h2>
+                    <h2 className={styles.notFoundTitle}>
+                        {productNotFound ? "Produk Tidak Ditemukan" : "Gagal Memuat Produk"}
+                    </h2>
                     <p className={styles.notFoundDescription}>{displayError}</p>
                     <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
                         <Link to="/products">
@@ -133,6 +140,13 @@ export default function ProductDetailPage() {
                             </Button>
                         </Link>
                     </div>
+                </div>
+            )}
+
+            {actionError && (
+                <div role="alert" className="flex items-center gap-3 rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800">
+                    <TbAlertCircle className="size-5 shrink-0" />
+                    <span>{actionError}</span>
                 </div>
             )}
 
