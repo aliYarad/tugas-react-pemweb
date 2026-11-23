@@ -17,13 +17,10 @@
 }
 
 .footerContainer {
-    @apply mx-auto max-w-6xl px-4 flex flex-col sm:flex-row items-center justify-between gap-2;
+    @apply mx-auto max-w-6xl px-4 flex items-center justify-center;
 }
 
 .footerText {
     @apply font-bold text-slate-900;
 }
 
-.footerSub {
-    @apply font-medium text-slate-600;
-}

@@ -16,9 +16,6 @@ export default function PageLayout() {
                     <p className={styles.footerText}>
                         Pemrograman Web · Tugas 4: React Router, Tailwind CSS, & Integrasi Backend
                     </p>
-                    <p className={styles.footerSub}>
-                        Menggunakan Arsitektur Atomic Design
-                    </p>
                 </div>
             </footer>
         </div>
