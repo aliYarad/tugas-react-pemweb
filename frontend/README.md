@@ -1,47 +1,50 @@
-# React Template — Pemrograman Web
+# Manajemen Produk — Tugas 4
 
-Template environment praktikum Pemrograman Web menggunakan **React, TypeScript, Vite, React Router, dan Tailwind CSS**. Mahasiswa menggunakan template ini sebagai fondasi repository tugas masing-masing, lalu mengembangkan fitur sesuai instruksi perkuliahan.
+Aplikasi manajemen produk menggunakan **React, TypeScript, Vite, React Router, Tailwind CSS, dan Express REST API**. Frontend menyediakan daftar produk, CRUD, halaman detail, dan halaman 404. Data produk dimuat dan disimpan melalui backend.
 
-## Membuat repository tugas
+Gunakan Node.js **22.12 atau lebih baru** dan npm.
 
-1. Buka [react-template](https://github.com/anasmcfudy/react-template).
-2. Pilih **Use this template → Create a new repository**.
-3. Isi nama repository tugas pada akun GitHub sendiri.
-4. Clone repository yang baru dibuat ke komputer.
+## Menjalankan aplikasi
+
+Jalankan backend dan frontend di terminal terpisah.
+
+### Backend
+
+Dari folder `tugas3-react-pemweb`, siapkan `.env` dengan `DATABASE_URL` PostgreSQL, lalu jalankan:
 
 ```sh
-git clone https://github.com/USERNAME/NAMA-REPOSITORY.git
-cd NAMA-REPOSITORY
+npm ci
+npx prisma migrate dev
+npm run dev
+```
+
+API berjalan di `http://localhost:3000`.
+
+### Frontend
+
+Dari folder `tugas3-react-pemweb/frontend`, siapkan alamat backend dan jalankan:
+
+```sh
+cp .env.example .env.local
 npm ci
 npm run dev
 ```
 
-Ganti `USERNAME` dan `NAMA-REPOSITORY` dengan akun serta nama repository tugas sendiri. Perubahan dan pengumpulan tugas dilakukan di repository tersebut.
+Pastikan `VITE_API_BASE_URL=http://localhost:3000` di `.env.local`. Buka alamat Vite yang ditampilkan, biasanya `http://127.0.0.1:5173`.
 
-Untuk sekadar mencoba template dosen:
-
-```sh
-git clone https://github.com/anasmcfudy/react-template.git
-cd react-template
-npm ci
-npm run dev
-```
-
-Gunakan Node.js **22.12 atau lebih baru** dan npm. Buka alamat yang ditampilkan Vite, biasanya `http://127.0.0.1:5173`.
-
-## Yang sudah tersedia
+## Fitur aplikasi
 
 - Konfigurasi React dan TypeScript dengan pemeriksaan tipe `strict`.
 - Vite sebagai development server dan build tool.
 - React Router dengan nested route serta layout yang menggunakan `Outlet`.
 - Tailwind CSS v4 melalui PostCSS, CSS Modules, dan token tema.
 - Contoh setiap tingkat Atomic Design: `Button`, `ProductCard`, `ProductGrid`, `PageLayout`, dan `ProductsPage`.
-- Contoh komunikasi API GET dengan pemisahan model, parameter, source, dan repository.
+- CRUD produk melalui REST API backend, dengan pemisahan model, parameter, source, dan repository.
+- Halaman daftar dengan pilihan grid/list, pencarian, dan preferensi tampilan.
+- Halaman detail produk pada `/products/:id` dan halaman 404 untuk URL yang tidak dikenal.
 - ESLint, Prettier, unit test, dan konfigurasi tes browser Playwright.
 
-Saat dibuka, halaman menampilkan **satu produk contoh: Pulpen**. Tombol **Pilih produk** memperlihatkan callback dari kartu ke state halaman. Tidak ada request API otomatis dan belum ada penyimpanan melalui localStorage.
-
-Template ini menyediakan environment serta contoh dasar. Fitur tugas seperti CRUD lengkap, pencarian, detail produk, halaman tambahan, dan 404 dikembangkan mahasiswa sesuai instruksi dosen.
+Halaman daftar memuat data dari backend saat dibuka. Operasi tambah, edit, dan hapus juga dikirim ke API; jika backend tidak tersedia, aplikasi menampilkan pesan error dan tidak menyimpan perubahan produk secara lokal. Preferensi tampilan grid/list tetap disimpan di `localStorage`.
 
 ## Struktur proyek
 
@@ -72,11 +75,11 @@ tests/
 
 Alur props: `ProductsPage → ProductGrid → ProductCard → Button`. Callback berjalan kembali menuju pemilik state.
 
-Folder `app` tetap menggunakan Vite. Nama `page.tsx` tidak otomatis membentuk route; daftarkan setiap URL di `app/routes.tsx`. Route `/` saat ini mengarahkan ke `/products`, begitu juga URL yang belum dikenali. Ubah fallback tersebut saat tugas meminta halaman 404. Hosting produksi perlu mendukung fallback SPA ke `index.html`.
+Folder `app` tetap menggunakan Vite. Nama `page.tsx` tidak otomatis membentuk route; daftarkan setiap URL di `app/routes.tsx`. Route `/` mengarahkan ke `/products`, sedangkan URL yang belum dikenali menampilkan halaman 404. Hosting produksi perlu mendukung fallback SPA ke `index.html`.
 
-## Mencoba GET API (opsional)
+## Menjalankan dengan backend
 
-Aplikasi dapat berjalan dengan produk contoh tanpa backend. Untuk mencoba tombol **Muat dari API**:
+Jalankan backend Express dari folder utama repository, lalu siapkan URL API untuk frontend:
 
 ```sh
 cp .env.example .env.local
@@ -85,10 +88,10 @@ cp .env.example .env.local
 Sesuaikan alamat backend di `.env.local`:
 
 ```dotenv
-VITE_API_BASE_URL=http://localhost:3000/api
+VITE_API_BASE_URL=http://localhost:3000
 ```
 
-Restart Vite setelah mengubah konfigurasi. Tombol akan meminta `GET http://localhost:3000/api/products`. Backend harus mengizinkan origin frontend melalui CORS.
+Backend menyediakan endpoint produk pada `/products`, sehingga URL di atas akan dipakai untuk seluruh operasi CRUD. Restart Vite setelah mengubah konfigurasi. Backend harus aktif dan mengizinkan origin frontend melalui CORS.
 
 Response yang diharapkan adalah **array langsung**:
 

@@ -21,7 +21,7 @@ export default function SettingsPage() {
         return "grid"
     })
     const [savedMessage, setSavedMessage] = useState("")
-    const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000"
+    const apiUrl = import.meta.env.VITE_API_BASE_URL?.trim() ?? ""
 
     function handleSave(mode: "grid" | "list") {
         setViewMode(mode)
@@ -120,12 +120,19 @@ export default function SettingsPage() {
                         <div>
                             <span className="text-xs font-medium text-slate-500">API Base URL</span>
                             <p className="font-mono text-sm font-semibold text-slate-800">
-                                {apiUrl}
+                                {apiUrl || "Belum dikonfigurasi"}
                             </p>
                         </div>
                     </div>
-                    <Badge variant="info">Aktif (Auto-Fallback)</Badge>
+                    <Badge variant={apiUrl ? "success" : "warning"}>
+                        {apiUrl ? "URL dikonfigurasi" : "URL belum dikonfigurasi"}
+                    </Badge>
                 </div>
+                {!apiUrl && (
+                    <p className="mt-3 text-sm text-amber-800">
+                        Salin .env.example menjadi .env.local, lalu jalankan ulang frontend.
+                    </p>
+                )}
             </div>
 
             <div className="mt-4 flex items-center justify-between border-t border-slate-200 pt-6">
