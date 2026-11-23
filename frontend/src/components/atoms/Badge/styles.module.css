@@ -1,0 +1,25 @@
+@reference "../../../../app/globals.css";
+
+.badge {
+    @apply inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-bold border-2 border-slate-900 shadow-[1.5px_1.5px_0px_0px_#0f172a];
+}
+
+.neutral {
+    @apply bg-slate-100 text-slate-900;
+}
+
+.info {
+    @apply bg-sky-200 text-slate-900;
+}
+
+.success {
+    @apply bg-emerald-200 text-slate-900;
+}
+
+.warning {
+    @apply bg-amber-200 text-slate-900;
+}
+
+.danger {
+    @apply bg-rose-200 text-slate-900;
+}

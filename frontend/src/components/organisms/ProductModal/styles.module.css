@@ -1,0 +1,33 @@
+@reference "../../../../app/globals.css";
+
+.overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6;
+}
+
+.backdrop {
+    @apply fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity;
+}
+
+.modal {
+    @apply relative w-full max-w-lg rounded-2xl border-3 border-slate-900 bg-white p-6 sm:p-7 shadow-[8px_8px_0px_0px_#0f172a];
+}
+
+.header {
+    @apply mb-5 flex items-center justify-between border-b-2 border-slate-900 pb-4;
+}
+
+.title {
+    @apply text-xl font-black text-slate-900;
+}
+
+.closeButton {
+    @apply rounded-xl border-2 border-slate-900 bg-slate-100 p-1.5 text-slate-900 shadow-[2px_2px_0px_0px_#0f172a] hover:bg-rose-100;
+}
+
+.form {
+    @apply flex flex-col gap-4;
+}
+
+.actions {
+    @apply mt-3 flex items-center justify-end gap-3 border-t-2 border-slate-900 pt-4;
+}
